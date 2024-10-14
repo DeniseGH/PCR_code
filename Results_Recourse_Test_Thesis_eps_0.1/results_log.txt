@@ -1,0 +1,1014 @@
+######### ESTIMATED #########
+ESTIMATED THETAS: [-0.4426574358295351, 0.14970722619426824, 0.5852586834321414]
+MEAN: tensor([ 0.0790, -0.1787,  0.0134])
+STD: tensor([0.8780, 1.1945, 1.1410])
+######### TRUE #########
+TRUE THETAS: [-0.99, 0.99, 0.99]
+MEAN: tensor([ 0.0790, -0.2219, -0.0354])
+STD: tensor([0.8780, 1.4748, 1.4011])
+######### TRUE #########
+PRIOR THETAS: [0, 0, 0]
+MEAN: tensor([ 0.0790, -0.1437,  0.1061])
+STD: tensor([0.8780, 1.0769, 0.9570])
+
+Choosen epsilon: 0.1
+Y_train: 411 ones, 389 zeros
+Y_test: 104 ones, 96 zeros 
+
+Number of correct predictions: 197
+MLP accuracy: 0.985
+Shape of the samples that need explanation: (95, 3)
+
+learning rates we will examine[1, 0.75, 0.5, 0.25, 0.1, 0.01]
+Learning Rate: 1
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 58, Number of zeros: 37 out of the total 95
+Number of ones: 48, Number of zeros: 47 out of the total 95
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 66, Number of zeros: 29 out of the total 95
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 15 times 
+
+Cost was greater for true SCM compared to the estimated 11 times 
+
+Cost was lower or equal for true SCM compared to the prior 7 times 
+
+Cost was greater for true SCM compared to the prior 11 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.6105263157894737
+Accuracy of Recourse valid under true SCM: 0.6947368421052632
+Accuracy of Recourse valid under all three SCMs: 0.3473684210526316
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.5052631578947369
+Accuracy of Recourse valid under true SCM: 0.6947368421052632
+Accuracy of Recourse valid under all three SCMs: 0.3473684210526316
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.75
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 55, Number of zeros: 40 out of the total 95
+Number of ones: 50, Number of zeros: 45 out of the total 95
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 64, Number of zeros: 31 out of the total 95
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 21 times 
+
+Cost was greater for true SCM compared to the estimated 11 times 
+
+Cost was lower or equal for true SCM compared to the prior 4 times 
+
+Cost was greater for true SCM compared to the prior 11 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.5789473684210527
+Accuracy of Recourse valid under true SCM: 0.6736842105263158
+Accuracy of Recourse valid under all three SCMs: 0.37894736842105264
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.5263157894736842
+Accuracy of Recourse valid under true SCM: 0.6736842105263158
+Accuracy of Recourse valid under all three SCMs: 0.37894736842105264
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.5
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 57, Number of zeros: 38 out of the total 95
+Number of ones: 50, Number of zeros: 45 out of the total 95
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 66, Number of zeros: 29 out of the total 95
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 21 times 
+
+Cost was greater for true SCM compared to the estimated 13 times 
+
+Cost was lower or equal for true SCM compared to the prior 5 times 
+
+Cost was greater for true SCM compared to the prior 13 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.6
+Accuracy of Recourse valid under true SCM: 0.6947368421052632
+Accuracy of Recourse valid under all three SCMs: 0.4105263157894737
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.5263157894736842
+Accuracy of Recourse valid under true SCM: 0.6947368421052632
+Accuracy of Recourse valid under all three SCMs: 0.4105263157894737
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.25
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 48, Number of zeros: 47 out of the total 95
+Number of ones: 40, Number of zeros: 55 out of the total 95
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 58, Number of zeros: 37 out of the total 95
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 21 times 
+
+Cost was greater for true SCM compared to the estimated 7 times 
+
+Cost was lower or equal for true SCM compared to the prior 5 times 
+
+Cost was greater for true SCM compared to the prior 7 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.5052631578947369
+Accuracy of Recourse valid under true SCM: 0.6105263157894737
+Accuracy of Recourse valid under all three SCMs: 0.3473684210526316
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.42105263157894735
+Accuracy of Recourse valid under true SCM: 0.6105263157894737
+Accuracy of Recourse valid under all three SCMs: 0.3473684210526316
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.1
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 39, Number of zeros: 56 out of the total 95
+Number of ones: 30, Number of zeros: 65 out of the total 95
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 46, Number of zeros: 49 out of the total 95
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 18 times 
+
+Cost was greater for true SCM compared to the estimated 4 times 
+
+Cost was lower or equal for true SCM compared to the prior 5 times 
+
+Cost was greater for true SCM compared to the prior 4 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.4105263157894737
+Accuracy of Recourse valid under true SCM: 0.4842105263157895
+Accuracy of Recourse valid under all three SCMs: 0.28421052631578947
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.3157894736842105
+Accuracy of Recourse valid under true SCM: 0.4842105263157895
+Accuracy of Recourse valid under all three SCMs: 0.28421052631578947
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.01
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 24, Number of zeros: 71 out of the total 95
+Number of ones: 15, Number of zeros: 80 out of the total 95
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 22, Number of zeros: 73 out of the total 95
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 13 times 
+
+Cost was greater for true SCM compared to the estimated 0 times 
+
+Cost was lower or equal for true SCM compared to the prior 0 times 
+
+Cost was greater for true SCM compared to the prior 0 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.25263157894736843
+Accuracy of Recourse valid under true SCM: 0.23157894736842105
+Accuracy of Recourse valid under all three SCMs: 0.1368421052631579
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.15789473684210525
+Accuracy of Recourse valid under true SCM: 0.23157894736842105
+Accuracy of Recourse valid under all three SCMs: 0.1368421052631579
+
+
+-----------------------------------------------------------
+
+
+Y_train: 442 ones, 358 zeros
+Y_test: 93 ones, 107 zeros 
+
+Number of correct predictions: 195
+MLP accuracy: 0.975
+Shape of the samples that need explanation: (106, 3)
+
+learning rates we will examine[1, 0.75, 0.5, 0.25, 0.1, 0.01]
+Learning Rate: 1
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 44, Number of zeros: 62 out of the total 106
+Number of ones: 24, Number of zeros: 82 out of the total 106
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 43, Number of zeros: 63 out of the total 106
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 9 times 
+
+Cost was greater for true SCM compared to the estimated 6 times 
+
+Cost was lower or equal for true SCM compared to the prior 1 times 
+
+Cost was greater for true SCM compared to the prior 6 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.41509433962264153
+Accuracy of Recourse valid under true SCM: 0.4056603773584906
+Accuracy of Recourse valid under all three SCMs: 0.1509433962264151
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.22641509433962265
+Accuracy of Recourse valid under true SCM: 0.4056603773584906
+Accuracy of Recourse valid under all three SCMs: 0.1509433962264151
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.75
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 39, Number of zeros: 67 out of the total 106
+Number of ones: 22, Number of zeros: 84 out of the total 106
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 41, Number of zeros: 65 out of the total 106
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 11 times 
+
+Cost was greater for true SCM compared to the estimated 3 times 
+
+Cost was lower or equal for true SCM compared to the prior 1 times 
+
+Cost was greater for true SCM compared to the prior 3 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.36792452830188677
+Accuracy of Recourse valid under true SCM: 0.3867924528301887
+Accuracy of Recourse valid under all three SCMs: 0.14150943396226415
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.20754716981132076
+Accuracy of Recourse valid under true SCM: 0.3867924528301887
+Accuracy of Recourse valid under all three SCMs: 0.14150943396226415
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.5
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 31, Number of zeros: 75 out of the total 106
+Number of ones: 17, Number of zeros: 89 out of the total 106
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 29, Number of zeros: 77 out of the total 106
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 5 times 
+
+Cost was greater for true SCM compared to the estimated 5 times 
+
+Cost was lower or equal for true SCM compared to the prior 2 times 
+
+Cost was greater for true SCM compared to the prior 5 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.29245283018867924
+Accuracy of Recourse valid under true SCM: 0.27358490566037735
+Accuracy of Recourse valid under all three SCMs: 0.11320754716981132
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.16037735849056603
+Accuracy of Recourse valid under true SCM: 0.27358490566037735
+Accuracy of Recourse valid under all three SCMs: 0.11320754716981132
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.25
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 19, Number of zeros: 87 out of the total 106
+Number of ones: 16, Number of zeros: 90 out of the total 106
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 19, Number of zeros: 87 out of the total 106
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 3 times 
+
+Cost was greater for true SCM compared to the estimated 2 times 
+
+Cost was lower or equal for true SCM compared to the prior 3 times 
+
+Cost was greater for true SCM compared to the prior 2 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.1792452830188679
+Accuracy of Recourse valid under true SCM: 0.1792452830188679
+Accuracy of Recourse valid under all three SCMs: 0.07547169811320754
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.1509433962264151
+Accuracy of Recourse valid under true SCM: 0.1792452830188679
+Accuracy of Recourse valid under all three SCMs: 0.07547169811320754
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.1
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 14, Number of zeros: 92 out of the total 106
+Number of ones: 11, Number of zeros: 95 out of the total 106
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 14, Number of zeros: 92 out of the total 106
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 5 times 
+
+Cost was greater for true SCM compared to the estimated 1 times 
+
+Cost was lower or equal for true SCM compared to the prior 1 times 
+
+Cost was greater for true SCM compared to the prior 1 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.1320754716981132
+Accuracy of Recourse valid under true SCM: 0.1320754716981132
+Accuracy of Recourse valid under all three SCMs: 0.0660377358490566
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.10377358490566038
+Accuracy of Recourse valid under true SCM: 0.1320754716981132
+Accuracy of Recourse valid under all three SCMs: 0.0660377358490566
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.01
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 4, Number of zeros: 102 out of the total 106
+Number of ones: 2, Number of zeros: 104 out of the total 106
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 4, Number of zeros: 102 out of the total 106
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 1 times 
+
+Cost was greater for true SCM compared to the estimated 0 times 
+
+Cost was lower or equal for true SCM compared to the prior 0 times 
+
+Cost was greater for true SCM compared to the prior 0 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.03773584905660377
+Accuracy of Recourse valid under true SCM: 0.03773584905660377
+Accuracy of Recourse valid under all three SCMs: 0.009433962264150943
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.018867924528301886
+Accuracy of Recourse valid under true SCM: 0.03773584905660377
+Accuracy of Recourse valid under all three SCMs: 0.009433962264150943
+
+
+-----------------------------------------------------------
+
+
+Y_train: 428 ones, 372 zeros
+Y_test: 85 ones, 115 zeros 
+
+Number of correct predictions: 195
+MLP accuracy: 0.975
+Shape of the samples that need explanation: (110, 3)
+
+learning rates we will examine[1, 0.75, 0.5, 0.25, 0.1, 0.01]
+Learning Rate: 1
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 67, Number of zeros: 43 out of the total 110
+Number of ones: 63, Number of zeros: 47 out of the total 110
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 75, Number of zeros: 35 out of the total 110
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 22 times 
+
+Cost was greater for true SCM compared to the estimated 14 times 
+
+Cost was lower or equal for true SCM compared to the prior 8 times 
+
+Cost was greater for true SCM compared to the prior 14 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.6090909090909091
+Accuracy of Recourse valid under true SCM: 0.6818181818181818
+Accuracy of Recourse valid under all three SCMs: 0.4
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.5727272727272728
+Accuracy of Recourse valid under true SCM: 0.6818181818181818
+Accuracy of Recourse valid under all three SCMs: 0.4
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.75
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 77, Number of zeros: 33 out of the total 110
+Number of ones: 58, Number of zeros: 52 out of the total 110
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 70, Number of zeros: 40 out of the total 110
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 25 times 
+
+Cost was greater for true SCM compared to the estimated 9 times 
+
+Cost was lower or equal for true SCM compared to the prior 12 times 
+
+Cost was greater for true SCM compared to the prior 9 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.7
+Accuracy of Recourse valid under true SCM: 0.6363636363636364
+Accuracy of Recourse valid under all three SCMs: 0.41818181818181815
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.5272727272727272
+Accuracy of Recourse valid under true SCM: 0.6363636363636364
+Accuracy of Recourse valid under all three SCMs: 0.41818181818181815
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.5
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 74, Number of zeros: 36 out of the total 110
+Number of ones: 55, Number of zeros: 55 out of the total 110
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 68, Number of zeros: 42 out of the total 110
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 27 times 
+
+Cost was greater for true SCM compared to the estimated 10 times 
+
+Cost was lower or equal for true SCM compared to the prior 5 times 
+
+Cost was greater for true SCM compared to the prior 10 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.6727272727272727
+Accuracy of Recourse valid under true SCM: 0.6181818181818182
+Accuracy of Recourse valid under all three SCMs: 0.38181818181818183
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.5
+Accuracy of Recourse valid under true SCM: 0.6181818181818182
+Accuracy of Recourse valid under all three SCMs: 0.38181818181818183
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.25
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 56, Number of zeros: 54 out of the total 110
+Number of ones: 53, Number of zeros: 57 out of the total 110
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 60, Number of zeros: 50 out of the total 110
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 32 times 
+
+Cost was greater for true SCM compared to the estimated 7 times 
+
+Cost was lower or equal for true SCM compared to the prior 7 times 
+
+Cost was greater for true SCM compared to the prior 7 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.509090909090909
+Accuracy of Recourse valid under true SCM: 0.5454545454545454
+Accuracy of Recourse valid under all three SCMs: 0.41818181818181815
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.4818181818181818
+Accuracy of Recourse valid under true SCM: 0.5454545454545454
+Accuracy of Recourse valid under all three SCMs: 0.41818181818181815
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.1
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 51, Number of zeros: 59 out of the total 110
+Number of ones: 51, Number of zeros: 59 out of the total 110
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 55, Number of zeros: 55 out of the total 110
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 36 times 
+
+Cost was greater for true SCM compared to the estimated 3 times 
+
+Cost was lower or equal for true SCM compared to the prior 2 times 
+
+Cost was greater for true SCM compared to the prior 3 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.4636363636363636
+Accuracy of Recourse valid under true SCM: 0.5
+Accuracy of Recourse valid under all three SCMs: 0.37272727272727274
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.4636363636363636
+Accuracy of Recourse valid under true SCM: 0.5
+Accuracy of Recourse valid under all three SCMs: 0.37272727272727274
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.01
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 41, Number of zeros: 69 out of the total 110
+Number of ones: 37, Number of zeros: 73 out of the total 110
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 41, Number of zeros: 69 out of the total 110
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 27 times 
+
+Cost was greater for true SCM compared to the estimated 0 times 
+
+Cost was lower or equal for true SCM compared to the prior 3 times 
+
+Cost was greater for true SCM compared to the prior 0 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.37272727272727274
+Accuracy of Recourse valid under true SCM: 0.37272727272727274
+Accuracy of Recourse valid under all three SCMs: 0.2727272727272727
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.33636363636363636
+Accuracy of Recourse valid under true SCM: 0.37272727272727274
+Accuracy of Recourse valid under all three SCMs: 0.2727272727272727
+
+
+-----------------------------------------------------------
+
+
+Y_train: 410 ones, 390 zeros
+Y_test: 96 ones, 104 zeros 
+
+Number of correct predictions: 199
+MLP accuracy: 0.995
+Shape of the samples that need explanation: (105, 3)
+
+learning rates we will examine[1, 0.75, 0.5, 0.25, 0.1, 0.01]
+Learning Rate: 1
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 67, Number of zeros: 38 out of the total 105
+Number of ones: 61, Number of zeros: 44 out of the total 105
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 70, Number of zeros: 35 out of the total 105
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 19 times 
+
+Cost was greater for true SCM compared to the estimated 15 times 
+
+Cost was lower or equal for true SCM compared to the prior 13 times 
+
+Cost was greater for true SCM compared to the prior 15 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.638095238095238
+Accuracy of Recourse valid under true SCM: 0.6666666666666666
+Accuracy of Recourse valid under all three SCMs: 0.44761904761904764
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.580952380952381
+Accuracy of Recourse valid under true SCM: 0.6666666666666666
+Accuracy of Recourse valid under all three SCMs: 0.44761904761904764
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.75
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 64, Number of zeros: 41 out of the total 105
+Number of ones: 56, Number of zeros: 49 out of the total 105
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 72, Number of zeros: 33 out of the total 105
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 26 times 
+
+Cost was greater for true SCM compared to the estimated 9 times 
+
+Cost was lower or equal for true SCM compared to the prior 7 times 
+
+Cost was greater for true SCM compared to the prior 9 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.6095238095238096
+Accuracy of Recourse valid under true SCM: 0.6857142857142857
+Accuracy of Recourse valid under all three SCMs: 0.4
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.5333333333333333
+Accuracy of Recourse valid under true SCM: 0.6857142857142857
+Accuracy of Recourse valid under all three SCMs: 0.4
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.5
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 65, Number of zeros: 40 out of the total 105
+Number of ones: 59, Number of zeros: 46 out of the total 105
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 71, Number of zeros: 34 out of the total 105
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 27 times 
+
+Cost was greater for true SCM compared to the estimated 12 times 
+
+Cost was lower or equal for true SCM compared to the prior 7 times 
+
+Cost was greater for true SCM compared to the prior 12 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.6190476190476191
+Accuracy of Recourse valid under true SCM: 0.6761904761904762
+Accuracy of Recourse valid under all three SCMs: 0.4380952380952381
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.5619047619047619
+Accuracy of Recourse valid under true SCM: 0.6761904761904762
+Accuracy of Recourse valid under all three SCMs: 0.4380952380952381
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.25
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 56, Number of zeros: 49 out of the total 105
+Number of ones: 54, Number of zeros: 51 out of the total 105
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 62, Number of zeros: 43 out of the total 105
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 21 times 
+
+Cost was greater for true SCM compared to the estimated 7 times 
+
+Cost was lower or equal for true SCM compared to the prior 5 times 
+
+Cost was greater for true SCM compared to the prior 7 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.5333333333333333
+Accuracy of Recourse valid under true SCM: 0.5904761904761905
+Accuracy of Recourse valid under all three SCMs: 0.3142857142857143
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.5142857142857142
+Accuracy of Recourse valid under true SCM: 0.5904761904761905
+Accuracy of Recourse valid under all three SCMs: 0.3142857142857143
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.1
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 41, Number of zeros: 64 out of the total 105
+Number of ones: 35, Number of zeros: 70 out of the total 105
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 44, Number of zeros: 61 out of the total 105
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 13 times 
+
+Cost was greater for true SCM compared to the estimated 2 times 
+
+Cost was lower or equal for true SCM compared to the prior 6 times 
+
+Cost was greater for true SCM compared to the prior 2 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.3904761904761905
+Accuracy of Recourse valid under true SCM: 0.41904761904761906
+Accuracy of Recourse valid under all three SCMs: 0.2
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.3333333333333333
+Accuracy of Recourse valid under true SCM: 0.41904761904761906
+Accuracy of Recourse valid under all three SCMs: 0.2
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.01
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 15, Number of zeros: 90 out of the total 105
+Number of ones: 13, Number of zeros: 92 out of the total 105
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 16, Number of zeros: 89 out of the total 105
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 7 times 
+
+Cost was greater for true SCM compared to the estimated 0 times 
+
+Cost was lower or equal for true SCM compared to the prior 1 times 
+
+Cost was greater for true SCM compared to the prior 0 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.14285714285714285
+Accuracy of Recourse valid under true SCM: 0.1523809523809524
+Accuracy of Recourse valid under all three SCMs: 0.0761904761904762
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.12380952380952381
+Accuracy of Recourse valid under true SCM: 0.1523809523809524
+Accuracy of Recourse valid under all three SCMs: 0.0761904761904762
+
+
+-----------------------------------------------------------
+
+
+Y_train: 417 ones, 383 zeros
+Y_test: 98 ones, 102 zeros 
+
+Number of correct predictions: 199
+MLP accuracy: 0.995
+Shape of the samples that need explanation: (101, 3)
+
+learning rates we will examine[1, 0.75, 0.5, 0.25, 0.1, 0.01]
+Learning Rate: 1
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 62, Number of zeros: 39 out of the total 101
+Number of ones: 53, Number of zeros: 48 out of the total 101
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 62, Number of zeros: 39 out of the total 101
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 15 times 
+
+Cost was greater for true SCM compared to the estimated 21 times 
+
+Cost was lower or equal for true SCM compared to the prior 7 times 
+
+Cost was greater for true SCM compared to the prior 21 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.6138613861386139
+Accuracy of Recourse valid under true SCM: 0.6138613861386139
+Accuracy of Recourse valid under all three SCMs: 0.42574257425742573
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.5247524752475248
+Accuracy of Recourse valid under true SCM: 0.6138613861386139
+Accuracy of Recourse valid under all three SCMs: 0.42574257425742573
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.75
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 70, Number of zeros: 31 out of the total 101
+Number of ones: 61, Number of zeros: 40 out of the total 101
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 65, Number of zeros: 36 out of the total 101
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 19 times 
+
+Cost was greater for true SCM compared to the estimated 24 times 
+
+Cost was lower or equal for true SCM compared to the prior 5 times 
+
+Cost was greater for true SCM compared to the prior 24 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.693069306930693
+Accuracy of Recourse valid under true SCM: 0.6435643564356436
+Accuracy of Recourse valid under all three SCMs: 0.4752475247524752
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.6039603960396039
+Accuracy of Recourse valid under true SCM: 0.6435643564356436
+Accuracy of Recourse valid under all three SCMs: 0.4752475247524752
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.5
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 75, Number of zeros: 26 out of the total 101
+Number of ones: 67, Number of zeros: 34 out of the total 101
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 75, Number of zeros: 26 out of the total 101
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 29 times 
+
+Cost was greater for true SCM compared to the estimated 15 times 
+
+Cost was lower or equal for true SCM compared to the prior 17 times 
+
+Cost was greater for true SCM compared to the prior 15 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.7425742574257426
+Accuracy of Recourse valid under true SCM: 0.7425742574257426
+Accuracy of Recourse valid under all three SCMs: 0.6039603960396039
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.6633663366336634
+Accuracy of Recourse valid under true SCM: 0.7425742574257426
+Accuracy of Recourse valid under all three SCMs: 0.6039603960396039
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.25
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 79, Number of zeros: 22 out of the total 101
+Number of ones: 72, Number of zeros: 29 out of the total 101
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 79, Number of zeros: 22 out of the total 101
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 42 times 
+
+Cost was greater for true SCM compared to the estimated 15 times 
+
+Cost was lower or equal for true SCM compared to the prior 12 times 
+
+Cost was greater for true SCM compared to the prior 15 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.7821782178217822
+Accuracy of Recourse valid under true SCM: 0.7821782178217822
+Accuracy of Recourse valid under all three SCMs: 0.6831683168316832
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.7128712871287128
+Accuracy of Recourse valid under true SCM: 0.7821782178217822
+Accuracy of Recourse valid under all three SCMs: 0.6831683168316832
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.1
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 75, Number of zeros: 26 out of the total 101
+Number of ones: 67, Number of zeros: 34 out of the total 101
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 76, Number of zeros: 25 out of the total 101
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 49 times 
+
+Cost was greater for true SCM compared to the estimated 6 times 
+
+Cost was lower or equal for true SCM compared to the prior 8 times 
+
+Cost was greater for true SCM compared to the prior 6 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.7425742574257426
+Accuracy of Recourse valid under true SCM: 0.7524752475247525
+Accuracy of Recourse valid under all three SCMs: 0.6237623762376238
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.6633663366336634
+Accuracy of Recourse valid under true SCM: 0.7524752475247525
+Accuracy of Recourse valid under all three SCMs: 0.6237623762376238
+
+
+-----------------------------------------------------------
+
+
+Learning Rate: 0.01
+
+
+ ##################### Entering find_recourse_MLP with comparison
+Starting causal recourse computation with SCM_PCR_linear_estimated
+Causal recourse computation with SCM_PCR_linear_estimated finished
+Starting causal recourse computation with SCM_PCR_linear_prior
+Causal recourse computation with SCM_PCR_linear_prior finished
+Number of ones: 47, Number of zeros: 54 out of the total 101
+Number of ones: 39, Number of zeros: 62 out of the total 101
+Starting causal recourse validation with SCM_PCR_linear (true SCM)
+Number of ones: 51, Number of zeros: 50 out of the total 101
+Causal recourse validation with SCM_PCR_linear finished
+
+Cost was lower or equal for true SCM compared to the estimated 28 times 
+
+Cost was greater for true SCM compared to the estimated 0 times 
+
+Cost was lower or equal for true SCM compared to the prior 4 times 
+
+Cost was greater for true SCM compared to the prior 0 times 
+Accuracy of Recourse valid under estimated SCM in the True SCM: 0.46534653465346537
+Accuracy of Recourse valid under true SCM: 0.504950495049505
+Accuracy of Recourse valid under all three SCMs: 0.31683168316831684
+Accuracy of Recourse valid under prior SCM in the True SCM: 0.38613861386138615
+Accuracy of Recourse valid under true SCM: 0.504950495049505
+Accuracy of Recourse valid under all three SCMs: 0.31683168316831684
+
+
+-----------------------------------------------------------
+
+
