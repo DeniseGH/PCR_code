@@ -10,8 +10,7 @@ import pandas as pd
 import functions_estimation_SCM
 from itertools import chain, combinations  # for the powerset of actionable combinations of interventions
 
-### SET THE DIRECTORY
-DAY_AND_TIME = "1003_1130"
+
 
 class SCM:
     """
@@ -264,8 +263,112 @@ class SCM:
         return mask_actionable, mask_soft_actionable, mask_hard_actionable
 
 # ----------------------------------------------------------------------------------------------------------------------
-# The following 4 classes are part of the thesis in Personalized Causal Reocurse
+# The following 5 classes are part of the thesis in Personalized Causal Reocurse
 # ----------------------------------------------------------------------------------------------------------------------
+
+class SCM_PCR_linear_Prior(SCM):
+    """ Semi-synthetic SCM inspired by https://arxiv.org/pdf/2006.06831, introduced by Karimi et al. """
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        thetas = [0, 0, 0]
+
+        # Set the file path to save the results
+        # current_dir = os.getcwd()  # Get the current working directory
+        # result_folder = os.path.join(current_dir, "Results")
+        # result_file_path = os.path.join(result_folder, f'results_log.txt')
+
+        # Open the file in write mode
+        # with open(result_file_path, 'a') as f:
+
+        #     # Write the true thetas to the file
+        #     f.write("######### TRUE #########\n")
+        #     f.write(f"PRIOR THETAS: {thetas}\n")
+
+        print("######### TRUE #########\n")
+        print(f"PRIOR THETAS: {thetas}\n")
+
+        # Define the functions f and inv_f
+        self.f = [lambda U0: U0,
+                lambda X0, U1: thetas[0] * X0 + U1,
+                lambda X0, X1, U2: thetas[1] * X0 + thetas[2] * X1 + U2,
+                ]
+
+        self.inv_f = [lambda X: X[:, [0]],
+                    lambda X: X[:, [1]] - thetas[0] * X[:, [0]],
+                    lambda X: X[:, [2]] - thetas[1] * X[:, [0]] - thetas[2] * X[:, [1]],
+                    ]
+
+        # Generate SCM data
+        scm_generated = functions_estimation_SCM.generate_scm(thetas)
+        df = scm_generated.sample(n_samples=100)
+
+        # Calculate mean and standard deviation
+        self.mean = torch.Tensor([np.mean(df["x1"]), np.mean(df["x2"]), np.mean(df["x3"])])
+        self.std = torch.Tensor([np.std(df["x1"]), np.std(df["x2"]), np.std(df["x3"])])
+
+        # Write the calculated mean and std to the file
+        # f.write(f"MEAN: {self.mean}\n")
+        # f.write(f"STD: {self.std}\n")
+
+        print(f"MEAN: {self.mean}\n")
+        print(f"STD: {self.std}\n\n")
+
+        # Set actionable and soft intervention values
+        self.actionable = [0, 1, 2]
+        self.soft_interv = [True, True, True]
+
+
+
+    def sample_U(self, N):
+       
+        U1 = np.random.normal(0, 1, N)
+        U2 = np.random.normal(0, 1, N)
+        U3 = np.random.normal(0, 1, N)
+        return np.c_[U1, U2, U3]
+
+    def label(self, X):
+        X_sum = X[:, 0]+ X[:, 1]+X[:, 2]  # Sum X1 + X2 + X3 for each sample
+        rho = np.mean(X_sum)  # Compute the average of X1 + X2 + X3 across all samples
+        
+        # Compute the logistic function for each sample
+        p = (1 + np.exp(-2.5 * (X_sum / rho)))**-1
+        
+        # Sample Y from a Bernoulli distribution based on these probabilities
+        Y = np.random.binomial(1, p)
+        
+        return Y
+
+    def get_Jacobian(self):
+        """
+        Computes the Jacobian matrix for the linear SCM.
+        """
+
+        thetas = [0, 0, 0]
+
+        return np.array([[1, 0, 0],
+                         [thetas[0], 1, 0],
+                         [thetas[1], thetas[2], 1]])
+
+
+    def get_Jacobian_interv(self, interv_set):
+        """
+        Computes the Jacobian matrix under interventions.
+        Parameters:
+        - interv_set: A list of indices where interventions occur
+        """
+        # Get the standard Jacobian
+        J = self.get_Jacobian()
+
+        # Iterate over the intervention set
+        for i in interv_set:
+            # If the intervention is hard (not soft), modify the Jacobian
+            if not self.soft_interv[i]:
+                # Set upstream effects to zero (all previous columns in the row)
+                for j in range(i):
+                    J[i][j] = 0.0
+        return J
+
 
 # Example from the paper thetas = [-0.99, 0.05, 0.25]
 
@@ -277,49 +380,49 @@ class SCM_PCR_linear(SCM):
         thetas = [-0.99, 0.05, 0.25]
 
         # Set the file path to save the results
-        current_dir = os.getcwd()  # Get the current working directory
-        result_folder = os.path.join(current_dir, "Results")
-        result_file_path = os.path.join(result_folder, f'results_log_{DAY_AND_TIME}.txt')
+        # current_dir = os.getcwd()  # Get the current working directory
+        # result_folder = os.path.join(current_dir, "Results")
+        # result_file_path = os.path.join(result_folder, f'results_log.txt')
 
         # Open the file in write mode
-        with open(result_file_path, 'a') as f:
+        # with open(result_file_path, 'a') as f:
 
-            # Write the true thetas to the file
-            f.write("######### TRUE #########\n")
-            f.write(f"TRUE THETAS: {thetas}\n")
+        # # Write the true thetas to the file
+        # f.write("######### TRUE #########\n")
+        # f.write(f"TRUE THETAS: {thetas}\n")
 
-            print("######### TRUE #########\n")
-            print(f"TRUE THETAS: {thetas}\n")
+        print("######### TRUE #########\n")
+        #print(f"TRUE THETAS: {thetas}\n")
 
-            # Define the functions f and inv_f
-            self.f = [lambda U0: U0,
-                      lambda X0, U1: thetas[0] * X0 + U1,
-                      lambda X0, X1, U2: thetas[1] * X0 + thetas[2] * X1 + U2,
-                      ]
+        # Define the functions f and inv_f
+        self.f = [lambda U0: U0,
+                    lambda X0, U1: thetas[0] * X0 + U1,
+                    lambda X0, X1, U2: thetas[1] * X0 + thetas[2] * X1 + U2,
+                    ]
 
-            self.inv_f = [lambda X: X[:, [0]],
-                          lambda X: X[:, [1]] - thetas[0] * X[:, [0]],
-                          lambda X: X[:, [2]] - thetas[1] * X[:, [0]] - thetas[2] * X[:, [1]],
-                          ]
+        self.inv_f = [lambda X: X[:, [0]],
+                        lambda X: X[:, [1]] - thetas[0] * X[:, [0]],
+                        lambda X: X[:, [2]] - thetas[1] * X[:, [0]] - thetas[2] * X[:, [1]],
+                        ]
 
-            # Generate SCM data
-            scm_generated = functions_estimation_SCM.generate_scm(thetas)
-            df = scm_generated.sample(n_samples=100)
+        # Generate SCM data
+        scm_generated = functions_estimation_SCM.generate_scm(thetas)
+        df = scm_generated.sample(n_samples=100)
 
-            # Calculate mean and standard deviation
-            self.mean = torch.Tensor([np.mean(df["x1"]), np.mean(df["x2"]), np.mean(df["x3"])])
-            self.std = torch.Tensor([np.std(df["x1"]), np.std(df["x2"]), np.std(df["x3"])])
+        # Calculate mean and standard deviation
+        self.mean = torch.Tensor([np.mean(df["x1"]), np.mean(df["x2"]), np.mean(df["x3"])])
+        self.std = torch.Tensor([np.std(df["x1"]), np.std(df["x2"]), np.std(df["x3"])])
 
-            # Write the calculated mean and std to the file
-            f.write(f"MEAN: {self.mean}\n")
-            f.write(f"STD: {self.std}\n")
+        # Write the calculated mean and std to the file
+        #f.write(f"MEAN: {self.mean}\n")
+        #f.write(f"STD: {self.std}\n")
 
-            print(f"MEAN: {self.mean}\n")
-            print(f"STD: {self.std}\n\n")
+        print(f"MEAN: {self.mean}\n")
+        print(f"STD: {self.std}\n\n")
 
-            # Set actionable and soft intervention values
-            self.actionable = [0, 1, 2]
-            self.soft_interv = [True, True, True]
+        # Set actionable and soft intervention values
+        self.actionable = [0, 1, 2]
+        self.soft_interv = [True, True, True]
 
 
 
@@ -384,64 +487,63 @@ class SCM_PCR_linear_estimated(SCM):
         super().__init__(**kwargs)
 
         # Set the file path to save the results
-        current_dir = os.getcwd()  # Get the current working directory
-        result_folder = os.path.join(current_dir, "Results")
-        result_file_path = os.path.join(result_folder, f'results_log_{DAY_AND_TIME}.txt')
+        # current_dir = os.getcwd()  # Get the current working directory
+        # result_folder = os.path.join(current_dir, "Results")
+        # result_file_path = os.path.join(result_folder, f'results_log.txt')
 
-        with open(result_file_path, 'w') as f:
+        # with open(result_file_path, 'w') as f:
 
-            print("\n######### ESTIMATED #########")
-            f.write("######### ESTIMATED #########\n")
-            folder_path = f"/home/tampieri/Results_Interventions_SD/IterationsResults_0927_2359/"
-
-            file_path = os.path.join(folder_path, 'final_results_Interventions_10.csv')
-            
-            # Read the CSV file into a pandas DataFrame
-            try:
-                data = pd.read_csv(file_path)
-            except FileNotFoundError:
-                print(f"File not found at path: {file_path}")
-                data = None
+        # print("\n######### ESTIMATED #########")
+        # f.write("######### ESTIMATED #########\n")
+        folder_path = f"./SCM_Estimation_Interventions_Paper_Thesis/"
+        file_path = os.path.join(folder_path, 'final_results_Interventions_10.csv')
         
-            # Calculate the mean for each column
-            thetas = data.mean().tolist()
-            
-            print("ESTIMATED THETAS", thetas)
-            f.write(f"ESTIMATED THETAS: {thetas}\n")
+        # Read the CSV file into a pandas DataFrame
+        try:
+            data = pd.read_csv(file_path)
+        except FileNotFoundError:
+            print(f"File not found at path: {file_path}")
+            data = None
+    
+        # Calculate the mean for each column
+        thetas = data.mean().tolist()
+        
+        print("ESTIMATED THETAS", thetas)
+        # f.write(f"ESTIMATED THETAS: {thetas}\n")
 
 
-            self.f = [lambda U0: U0 ,
-                    lambda X0, U1: (thetas[0])*X0+ U1, 
-                    lambda X0, X1, U2: thetas[1]*X0 +thetas[2]*X1+U2, 
+        self.f = [lambda U0: U0 ,
+                lambda X0, U1: (thetas[0])*X0+ U1, 
+                lambda X0, X1, U2: thetas[1]*X0 +thetas[2]*X1+U2, 
+                ]
+
+        self.inv_f = [lambda X: X[:, [0]],
+                    lambda X: X[:, [1]] - thetas[0]*X[:, [0]],
+                    lambda X: X[:, [2]] - thetas[1]*X[:, [0]] - thetas[2]*X[:, [1]],
                     ]
 
-            self.inv_f = [lambda X: X[:, [0]],
-                        lambda X: X[:, [1]] - thetas[0]*X[:, [0]],
-                        lambda X: X[:, [2]] - thetas[1]*X[:, [0]] - thetas[2]*X[:, [1]],
-                        ]
 
+        scm_generated = functions_estimation_SCM.generate_scm(thetas)
+        df=scm_generated.sample(n_samples=100)
 
-            scm_generated = functions_estimation_SCM.generate_scm(thetas)
-            df=scm_generated.sample(n_samples=100)
+        
 
-            
+        # Compute the mean of x1, x2, and x3
+        x1_mean = np.mean(df["x1"])
+        x2_mean = np.mean(df["x2"])
+        x3_mean = np.mean(df["x3"])
 
-            # Compute the mean of x1, x2, and x3
-            x1_mean = np.mean(df["x1"])
-            x2_mean = np.mean(df["x2"])
-            x3_mean = np.mean(df["x3"])
+        self.mean = torch.Tensor([x1_mean, x2_mean, x3_mean]) #mean of the etimated
+        
+        self.std = torch.Tensor([np.std(df["x1"]), np.std(df["x2"]), np.std(df["x3"])])
+        
+        print("MEAN: ",self.mean, " STD: ", self.std)
 
-            self.mean = torch.Tensor([x1_mean, x2_mean, x3_mean]) #mean of the etimated
-            
-            self.std = torch.Tensor([np.std(df["x1"]), np.std(df["x2"]), np.std(df["x3"])])
-            
-            print("MEAN: ",self.mean, " STD: ", self.std)
-
-            f.write(f"MEAN: {self.mean}\n")
-            f.write(f"STD: {self.std}\n")
-            print()
-            self.actionable = [0, 1, 2]
-            self.soft_interv = [True, True, True]
+        # f.write(f"MEAN: {self.mean}\n")
+        # f.write(f"STD: {self.std}\n")
+        print()
+        self.actionable = [0, 1, 2]
+        self.soft_interv = [True, True, True]
 
     def sample_U(self, N):
 
@@ -517,7 +619,7 @@ class SCM_PCR_linear_Test(SCM):
         # Set the file path to save the results
         current_dir = os.getcwd()  # Get the current working directory
         result_folder = os.path.join(current_dir, "Results")
-        result_file_path = os.path.join(result_folder, f'results_log_{DAY_AND_TIME}.txt')
+        result_file_path = os.path.join(result_folder, f'results_log.txt')
 
         # Open the file in write mode
         with open(result_file_path, 'a') as f:
@@ -619,7 +721,7 @@ class SCM_PCR_linear_estimated_Test(SCM):
         # Set the file path to save the results
         current_dir = os.getcwd()  # Get the current working directory
         result_folder = os.path.join(current_dir, "Results")
-        result_file_path = os.path.join(result_folder, f'results_log_{DAY_AND_TIME}.txt')
+        result_file_path = os.path.join(result_folder, f'results_log.txt')
 
         with open(result_file_path, 'w') as f:
 

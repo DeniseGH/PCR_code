@@ -124,6 +124,8 @@ class LinearRecourse:
 
         return action, finished.astype(np.bool_), cost, cfs
 
+
+
 class DifferentiableRecourse:
     """
     Implementation of Algorithm 1 in the paper

@@ -1,22 +1,14 @@
-import matplotlib.pyplot as plt
-import random
-import pandas as pd
-import seaborn as sns
 import numpy as np
+import pandas as pd
 import networkx as nx
+import seaborn as sns
 
-from cgm import CausalGraphicalModel
 from csm import StructuralCausalModel
-from csm import CausalAssignmentModel
 
 
 
-# Here I changed the theta definition to be a vector instead of a matrix. Basically, since most of the entries
-# of the matrix are zero, we can just consider a "flatter" representation.
-def generate_scm(thetas):
-    generator = np.random.default_rng(2024)
-    if thetas == [-0.99, 0.05, 0.25]:
-        def mixture_of_gaussians(generator, n_samples):
+
+def mixture_of_gaussians(generator, n_samples):
             """
             Generates samples from a mixture of two Gaussian distributions:
             - 50% of the samples are from N(-2, 1.5^2)
@@ -33,6 +25,15 @@ def generate_scm(thetas):
             )
             
             return samples
+
+# Here I changed the theta definition to be a vector instead of a matrix. Basically, since most of the entries
+# of the matrix are zero, we can just consider a "flatter" representation.
+def generate_scm(thetas):
+    #print("generate_scm")
+    generator = np.random.default_rng(2024)
+    if np.all(thetas == np.array([-0.99, 0.05, 0.25])):
+
+        print("\n You picked thetas: ", thetas, " and a mixure of Gaussians")
             
         scm = StructuralCausalModel({
         "x1": lambda n_samples, thetas=thetas: mixture_of_gaussians(generator, n_samples),
@@ -42,6 +43,7 @@ def generate_scm(thetas):
                                                                                                       size=n_samples),
     })
     else:
+
         scm = StructuralCausalModel({
             "x1": lambda n_samples, thetas=thetas: generator.normal(loc=0, scale=1, size=n_samples),
             "x2": lambda x1, n_samples, thetas=thetas: thetas[0] * x1 + generator.normal(loc=0, scale=1, size=n_samples),
@@ -137,3 +139,41 @@ def log_posterior(thetas, interventions, values_real_scm, TRUE_THETA_MIN, TRUE_T
     log_lk = likelihood(interventions, values_real_scm, thetas, epsilon, alpha_value, version, info_descendents)
     log_lk = np.log(log_lk) if log_lk > 0 else -np.inf
     return log_lk + log_prior(thetas, TRUE_THETA_MIN, TRUE_THETA_MAX)
+
+
+
+def generate_user_info(simulation_scm, TRUE_THETAS, interventions, ALPHA, info_descendents, noisy_thetas):
+        
+        noisy_scm = generate_scm(noisy_thetas)
+        print("\n ################# True thetas", TRUE_THETAS, " and Noisy thetas ", noisy_thetas, " with alpha = ", ALPHA, " #################\n")
+
+
+
+        values_real_scm = []
+
+        for intervention in interventions:
+            # Generate a random value between 0 and 1
+            random_value = np.random.rand()
+
+            # Choose the appropriate SCM based on the random value
+            if random_value >= ALPHA:
+                scm_do_real = intervened_data(simulation_scm, intervention, "soft")
+            else:
+                scm_do_real = intervened_data(noisy_scm, intervention, "soft")
+            
+            node, value = intervention
+            
+            mean_1 = np.nan  # Initialize with NaN
+            mean_2 = np.mean(scm_do_real["x3"].values)
+
+            if node == "x1":
+                mean_1 = np.mean(scm_do_real["x2"].values)
+                if info_descendents == "partial":
+                    if np.random.choice([True, False]):
+                        mean_1 = np.nan
+                    else:
+                        mean_2 = np.nan
+
+            values_real_scm.append([mean_1, mean_2])
+
+        return values_real_scm
