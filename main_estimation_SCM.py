@@ -5,6 +5,76 @@ from multiprocessing import Pool
 import os
 import csv
 import functions_estimation_SCM
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set the seaborn style
+sns.set(
+    style="ticks",
+    rc={
+        "font.family": "serif",
+    }
+)
+
+def plot_convergence_estimation(sampler, estimated_theta, true_data, TRUE_THETA_MIN, TRUE_THETA_MAX, epsilon, interventions_num, ALPHA_, iteration_num, focus_of_analysis):
+    scm_estimated = functions_estimation_SCM.generate_scm(estimated_theta)
+    estm_data = scm_estimated.sample(1000)
+    samples = sampler.get_chain()
+    
+    # Define the path where the image will be saved
+    save_path = f"Results_SCM_Estimation_{focus_of_analysis}"
+    os.makedirs(save_path, exist_ok=True)  # Create the directory if it doesn't exist
+
+    # Plot settings
+    fig, ax = plt.subplots(3, 2, figsize=(12, 10))
+    colors = sns.color_palette("husl", 3)  # Use a color palette for distinct colors
+
+    # For each node, plot the convergence of the particles
+    for id in range(3):
+        if id == 2:
+            # Plot convergence for θ_{32}
+            ax[id, 0].plot(samples[:, :, id], alpha=0.6, linewidth=1.5, color=colors[id])
+            ax[id, 0].set_ylabel(r"$\theta_{32}$", fontsize=14)        
+            ax[id, 0].set_title(r"Convergence for $θ_{32}$", fontsize=16)
+        else:
+            # Plot convergence for θ_{21} and θ_{31}
+            ax[id, 0].plot(samples[:, :, id], alpha=0.6, linewidth=1.5, color=colors[id + 1])
+            ax[id, 0].set_ylabel(r"$\theta_{" + str(id + 2) + "1}$", fontsize=14)
+            ax[id, 0].set_title(r"Convergence for $\theta_{" + str(id + 2) + "1}$", fontsize=16)
+
+
+        ax[id, 0].set_ylim(TRUE_THETA_MIN - 0.5, TRUE_THETA_MAX + 0.5)
+        ax[id, 0].set_xlabel("Iterations", fontsize=14)
+        
+        ax[id, 0].grid(True, linestyle='--', alpha=0.7)
+        
+        # Plot KDE for estimated vs. true data
+        sns.kdeplot(estm_data[f"x{id+1}"], ax=ax[id, 1], color=colors[id], label=f'$X_{id+1}$', linewidth=2)
+        sns.kdeplot(true_data[f"x{id+1}"], ls='--', ax=ax[id, 1], color='black', label='Truth', linewidth=2)
+        ax[id, 1].set_title(f"KDE for $X_{id+1}$", fontsize=16)
+        ax[id, 1].set_xlabel(f"$X_{id+1}$ Values", fontsize=14)
+        ax[id, 1].set_ylabel("Density", fontsize=14)
+        ax[id, 1].grid(True, linestyle='--', alpha=0.7)
+        ax[id, 1].legend(fontsize=14)
+
+
+    # Show the plot with estimated_theta and TRUE_THETAS
+    fig.suptitle(fr"Results of MCMC (Estimated: {list(np.round(estimated_theta,2))}, $\sigma$ = {epsilon}, α = {ALPHA_})", fontsize=16)
+
+    plt.tight_layout()
+    plt.subplots_adjust(top=0.9)  # Adjust title to fit
+
+    # Save the plot as a PNG file
+    file_name = f"convergence_{TRUE_THETA_MIN}_and_{TRUE_THETA_MAX}_epsilon_{epsilon}_inter_{interventions_num}_alpha_{ALPHA_}_TRUE_THETAS_{TRUE_THETAS}_{iteration_num}.png"
+    full_path = os.path.join(save_path, file_name)
+    plt.savefig(full_path, dpi=300)  # Save with high resolution
+    file_name = f"convergence_{TRUE_THETA_MIN}_and_{TRUE_THETA_MAX}_epsilon_{epsilon}_inter_{interventions_num}_alpha_{ALPHA_}_TRUE_THETAS_{TRUE_THETAS}_{iteration_num}.pdf"
+    full_path = os.path.join(save_path, file_name)
+    plt.savefig(full_path, dpi=300)  # Save with high resolution
+
+    print(f"Plot saved successfully at {full_path}")
+
+
 
 
 example_type = input("\nWhich set of thetas do you want to use? (test/paper): ").strip().lower()
@@ -12,19 +82,23 @@ example_type = input("\nWhich set of thetas do you want to use? (test/paper): ")
 # Check user input and initialize variables accordingly
 if example_type == "test":
     TRUE_THETAS = [-0.99, 0.99, 0.99]
-else:
+elif example_type == "paper":
     TRUE_THETAS = [-0.99, 0.05, 0.25]
+else:
+    TRUE_THETAS = [0, 0, 0]
 
 
 
-focus_of_analysis = input("\nWhat's the focus of your analysis? (Trial/Interventions/Alpha/Epsilon): ")
+
+
+focus_of_analysis = input("\nWhat's the focus of your analysis? (Trial/Trial_Non_Linear/Interventions/Alpha/Epsilon): ")
 TRUE_THETA_MAX = 1
 TRUE_THETA_MIN = -1
 noisy_thetas = [0.5, -0.5, -0.5]
 INFO_REQUESTED = "full"
 likelihood_version = "soft"
 timeout = 400
-nwalkers = 30 # Number of particles (they call them walkers)
+nwalkers = 50 # Number of particles (they call them walkers)
 nsteps = 50 # Number of steps/iterations.
 ITERATIONS_NUMBER = 10
 
@@ -72,7 +146,7 @@ with open(csv_file_path, mode='w', newline='') as file:
 
     if focus_of_analysis == "Alpha":
         interventions_num = 10
-        epsilon = 0.4
+        epsilon = 0.7
         list_ = np.arange(0.0, 1.0 + 0.1, 0.1).round(1).tolist()
         
         writer.writerow(['interventions_num', interventions_num])
@@ -91,7 +165,7 @@ with open(csv_file_path, mode='w', newline='') as file:
 
     if focus_of_analysis == "Interventions":
         ALPHA = 0.0
-        epsilon = 0.6
+        epsilon = 0.4
         list_ = np.arange(7, 16, 1).round(1).tolist()
 
         writer.writerow(['interventions_list', list_])
@@ -101,6 +175,15 @@ with open(csv_file_path, mode='w', newline='') as file:
     if focus_of_analysis == "Trial":
         ALPHA = 0.1
         epsilon = 0.5
+        list_ = [10]
+
+        writer.writerow(['interventions_list', list_])
+        writer.writerow(['epsilon', epsilon])
+        writer.writerow(['alpha', ALPHA])
+
+    if focus_of_analysis == "Trial_Non_Linear":
+        ALPHA = 0.1
+        epsilon = 0.6
         list_ = [10]
 
         writer.writerow(['interventions_list', list_])
@@ -127,6 +210,8 @@ for element in list_:
     if focus_of_analysis == "Interventions":
         interventions_num = element
     if focus_of_analysis == "Trial":
+        interventions_num = element
+    if focus_of_analysis == "Trial_Non_Linear":
         interventions_num = element
 
 
@@ -177,6 +262,11 @@ for element in list_:
 
         chain_ = sampler.get_chain(flat=True, discard=0.7)
         estimated_theta = np.mean(chain_, axis=0)
+
+
+        
+        true_data = simulation_scm.sample(1000)
+        plot_convergence_estimation(sampler, estimated_theta, true_data, TRUE_THETA_MIN, TRUE_THETA_MAX,epsilon, interventions_num, ALPHA, iteration_num, focus_of_analysis)
 
         # Append the results to final_results
         final_results.append(estimated_theta)

@@ -9,6 +9,9 @@ from scm import SCM_PCR_linear_estimated
 from scm import SCM_PCR_linear_Test
 from scm import SCM_PCR_linear_estimated_Test
 from scm import SCM_PCR_linear_Prior
+from scm import SCM_PCR_not_linear
+from scm import SCM_PCR_not_linear_estimated
+
 import csv
 import uuid  # Import the UUID module to create unique keys
 
@@ -198,10 +201,10 @@ def get_valid_float(prompt):
 def get_valid_example_type(prompt):
     while True:
         example_type = input(prompt).strip().lower()
-        if example_type in ['test', 'paper']:
+        if example_type in ['test', 'paper', 'not_linear']:
             return example_type
         else:
-            print("Invalid input! Please choose either 'test' or 'paper'.")
+            print("Invalid input! Please choose either 'test' or 'paper' or 'not_linear'.")
 
 # Function to validate the path input
 def get_valid_directory(prompt):
@@ -223,13 +226,13 @@ def get_valid_directory(prompt):
             print("Invalid input! Please enter 'yes' or 'no'.")
 
 
-name_of_the_folder = input("Please write the name of the folder: ")
+name_of_the_folder = input("Please write the name of a new folder that stores the results: ")
 current_dir = get_valid_directory("Do you want to use the current directory to store the results? (yes/no): ")
 
 log_file, csv_file_path, interv_file_path = set_the_csv_files(current_dir, name_of_the_folder)
 
 
-example_type = get_valid_example_type("Which example do you want to use? (test/paper): ")
+example_type = get_valid_example_type("Which example do you want to use? (test/paper/not_linear): ")
 epsilon = get_valid_float("Which value of epsilon would you like to use? (Suggested 0.0/0.1/0.2): ")
 
 
@@ -239,11 +242,17 @@ if example_type == "test":
     true_thetas = [-0.99, 0.99, 0.99]  # From true SCM
     scmm_estimated = SCM_PCR_linear_estimated_Test()  # Estimated SCM
     scmm_true = SCM_PCR_linear_Test()  # True SCM
-else:
+elif example_type == "paper":
     # Paper example (default if user doesn't input 'test')
     true_thetas = [-0.99, 0.05, 0.25]  # From true SCM
     scmm_true = SCM_PCR_linear()  # True SCM
     scmm_estimated = SCM_PCR_linear_estimated()  # Estimated SCM
+else:
+    # Paper example (default if user doesn't input 'test')
+    true_thetas = [0, 0, 0]  # From true SCM
+    scmm_true = SCM_PCR_not_linear()  # True SCM
+    scmm_estimated = SCM_PCR_not_linear_estimated()  # Estimated SCM
+
 
 scmm_prior = SCM_PCR_linear_Prior()
 

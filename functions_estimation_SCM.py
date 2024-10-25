@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 import seaborn as sns
-
+import torch
 from csm import StructuralCausalModel
 
 
@@ -29,18 +29,28 @@ def mixture_of_gaussians(generator, n_samples):
 # Here I changed the theta definition to be a vector instead of a matrix. Basically, since most of the entries
 # of the matrix are zero, we can just consider a "flatter" representation.
 def generate_scm(thetas):
-    #print("generate_scm")
+    # print("generate_scm")
     generator = np.random.default_rng(2024)
-    if np.all(thetas == np.array([-0.99, 0.05, 0.25])):
 
+    if np.all(thetas == np.array([-0.99, 0.05, 0.25])):
         print("\n You picked thetas: ", thetas, " and a mixure of Gaussians")
             
         scm = StructuralCausalModel({
         "x1": lambda n_samples, thetas=thetas: mixture_of_gaussians(generator, n_samples),
         "x2": lambda x1, n_samples, thetas=thetas: thetas[0] * x1 + generator.normal(loc=0, scale=1, size=n_samples),
         "x3": lambda x2, x1, n_samples, thetas=thetas: thetas[1] * x1 + thetas[2] * x2 + generator.normal(loc=0,
-                                                                                                          scale=1,
-                                                                                                      size=n_samples),
+                                                                                                        scale=1,
+                                                                                                    size=n_samples),
+    })
+    elif np.all(thetas == np.array([0, 0, 0])):
+        print("\n You picked non linear ANM: ", thetas, " and a mixure of Gaussians")
+            
+        scm = StructuralCausalModel({
+        "x1": lambda n_samples, thetas=thetas: mixture_of_gaussians(generator, n_samples),
+        "x2": lambda x1, n_samples, thetas=thetas:-1 +3/(1+ np.exp(-2*x1)) + generator.normal(loc=0, scale=0.1, size=n_samples),
+        "x3": lambda x2, x1, n_samples, thetas=thetas: -0.05 * x1 + 0.25 * x2*x2 + generator.normal(loc=0,
+                                                                                                        scale=1,
+                                                                                                    size=n_samples),
     })
     else:
 
@@ -51,8 +61,25 @@ def generate_scm(thetas):
                                                                                                             scale=1,
                                                                                                         size=n_samples),
         })
+
     return scm
 
+# def generate_scm_2(thetas):
+#     # print("generate_scm")
+#     generator = np.random.default_rng(2024)
+#     np.random.seed(42)
+#     scm = StructuralCausalModel({
+#         "x1": lambda n_samples, thetas=thetas: torch.tensor(np.random.binomial(1, 0.5, size=n_samples), dtype=torch.float32),
+#         "x2": lambda x1, n_samples, thetas=thetas: -35 + thetas[0]*x1 + torch.tensor(np.random.gamma(shape=10, scale=3.5, size=n_samples), dtype=torch.float32),
+#         "x3": lambda x2, x1, n_samples, thetas=thetas: -0.5 + thetas[1] * x1 + thetas[2] * x2 + torch.normal(mean=0, std=0.25, size=(n_samples,)),
+#         "x4": lambda x3, x2, x1, n_samples, thetas=thetas: 1  + x1 - 0.01 * (x2) + torch.normal(mean=0, std=4, size=(n_samples,)),
+#         "x5": lambda x4, x3, x2, x1, n_samples, thetas=thetas: -1 + 0.1 * x2 + 2 * x1 + x4 + torch.normal(mean=0, std=9, size=(n_samples,)),
+#         "x6": lambda x5, x4, x3, x2, x1, n_samples: -4 +0.1*35 + 0.1 * (x2) + 2 * x1 + 0.05 * x1 +  0.05 * x3 + torch.normal(mean=0, std=4, size=(n_samples,)),
+#         "x7": lambda x6, x5, x4, x3, x2, x1, n_samples: -4 + 1.5 * x6 + torch.normal(mean=0, std=25, size=(n_samples,))
+#     })
+
+
+#     return scm
 
 # %%
 # I've changed this function to perform a "soft intervention" instead.
@@ -162,9 +189,15 @@ def generate_user_info(simulation_scm, TRUE_THETAS, interventions, ALPHA, info_d
                 scm_do_real = intervened_data(noisy_scm, intervention, "soft")
             
             node, value = intervention
-            
+
             mean_1 = np.nan  # Initialize with NaN
             mean_2 = np.mean(scm_do_real["x3"].values)
+            # if (len(TRUE_THETAS) > 3):
+            #     mean_3 = np.mean(scm_do_real["x4"].values)
+            #     mean_4 = np.mean(scm_do_real["x5"].values)
+            #     mean_5 = np.mean(scm_do_real["x6"].values)
+            #     mean_6 = np.mean(scm_do_real["x7"].values)
+
 
             if node == "x1":
                 mean_1 = np.mean(scm_do_real["x2"].values)
@@ -174,6 +207,11 @@ def generate_user_info(simulation_scm, TRUE_THETAS, interventions, ALPHA, info_d
                     else:
                         mean_2 = np.nan
 
+        
+            # if (len(TRUE_THETAS) > 3):
+            #     values_real_scm.append([mean_1, mean_2, mean_3, mean_4, mean_5, mean_6])
+            # else:
             values_real_scm.append([mean_1, mean_2])
+
 
         return values_real_scm
