@@ -34,7 +34,10 @@ Before running the code, please ensure you have Python installed on your system.
 To run the code, you can use the following files that start with **main**:
 
 - **For Estimation:**
-  - `main_estimation_SCM.py`: Executes the estimation process.
+  - `main_estimation_SCM.py`: Executes the estimation process. The estimation can be performed with three different sets of theta values, which correspond to the models discussed in the thesis:
+    - **$\mathcal{M}_1$**: Use the input `"test"` in the terminal.
+    - **$\mathcal{M}_2$**: Use the input `"paper"` in the terminal.
+    - **$\mathcal{M}_3$**: Use the input `"non_linear"` in the terminal.
   
 - **For Recourse:**
   - `main_find_recourse.py`: Executes the recourse process.
