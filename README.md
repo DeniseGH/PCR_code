@@ -43,7 +43,7 @@ To run the code, you can use the following files that start with **main**:
   - `main_plot_results_estimation_SCM.py`: Generates plots for the estimation phase, specifically mean and standard error of the difference between the Ground Truth and the estimated coefficients for various values of $\alpha$ and $\sigma$.
   
 - **For Plotting Recourse Results:**
-  - `main_recourse_plots_functions.py`: Generates plots for recourse, focusing on cost and effectiveness (e.g., Figures 2 and 3) for several robustness values
+  - `main_recourse_plots_functions.py`: Generates plots for recourse, focusing on cost and effectiveness (e.g., Figures 2 and 3) for several robustness values $\epsilon$.
 
 ## Conclusion
 Feel free to explore the code and adapt it for your own use.
