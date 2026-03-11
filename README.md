@@ -1,7 +1,7 @@
 # Personalized Casual Recourse
 
 ## Overview
-This project focuses on developing a personalized casual recourse framework that comprises two main stages: **Estimation of the user SCM** and **Recourse using the Estimated SCM**. The estimation phase represents our innovative contribution to the field and is based on the Causal structures of [ijmbarr/causalgraphicalmodels](https://github.com/ijmbarr/causalgraphicalmodels), while the recourse phase heavily relies on the implementation from [RicardoDominguez/AdversariallyRobustRecourse](https://github.com/RicardoDominguez/AdversariallyRobustRecourse).
+This project focuses on developing a personalized casual recourse framework that comprises two main stages: **Estimation of the user Structural Causal Model** (SCM) and **Recourse using the Estimated SCM**. The estimation phase represents our innovative contribution to the field and is based on the Causal structures of [ijmbarr/causalgraphicalmodels](https://github.com/ijmbarr/causalgraphicalmodels), while the recourse phase heavily relies on the implementation from [RicardoDominguez/AdversariallyRobustRecourse](https://github.com/RicardoDominguez/AdversariallyRobustRecourse).
 
 ## Prerequisites
 Before running the code, please ensure you have Python installed on your system. It is recommended to create a virtual environment for this project.
